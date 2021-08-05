@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Layout, Menu, Breadcrumb } from "antd";
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from "@ant-design/icons";
+import DemoLine from "../components/chart/chartLine";
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
 
@@ -51,7 +52,7 @@ const MainContainer: React.FunctionComponent<MainContainerProps> = () => {
                                                 minHeight: 280,
                                         }}
                                 >
-                                        Content
+                                        <DemoLine />
                                 </Content>
                         </Layout>
                 </Layout>
