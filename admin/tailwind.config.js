@@ -3,7 +3,13 @@ module.exports = {
         purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
         darkMode: false, // or 'media' or 'class'
         theme: {
-                extend: {},
+                extend: {
+                        spacing: {
+                                ...theme.spacing,
+                                112.5: "28.125rem",
+                                125: "31.25rem",
+                        },
+                },
                 colors: {
                         ...theme.colors,
                         "red-violet": {
