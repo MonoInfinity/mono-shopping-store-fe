@@ -8,19 +8,19 @@ export class AuthAPI {
         constructor(private readonly apiCall: AxiosInstance, readonly prefix: string) {}
 
         async loginUser(input: UserLoginDto) {
-                const url = `${this.prefix + "/login"}`;
+                const url = `${this.prefix}"/login"`;
                 const res = await this.apiCall.post<ServerResponse<null>>(url, input);
                 return res;
         }
 
         async logoutUser() {
-                const url = `${this.prefix + "/logout"}`;
+                const url = `${this.prefix}"/logout"`;
                 const res = await this.apiCall.post<ServerResponse<null>>(url);
                 return res;
         }
 
         async registerUser(input: UserRegisterDto) {
-                const url = `${this.prefix + "/register"}`;
+                const url = `${this.prefix}"/register"`;
                 const res = await this.apiCall.post<ServerResponse<null>>(url, input);
                 return res;
         }

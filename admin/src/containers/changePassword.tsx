@@ -1,31 +1,39 @@
-import * as React from "react";
+import { ApiState } from "../common/interface/api.interface";
+import { ChangePasswordDto } from "../common/interface/dto/user.dto";
+import { Form } from "antd";
 import { Link } from "react-router-dom";
+import { RootState } from "../store";
+import { RouteProtectedWrapper } from "../common/HOC/routerProtectedWrapper";
+import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import * as React from "react";
+import FormBtn from "../components/form/formBtn";
 import routers from "../common/constants/router";
 import TextFieldPassword from "../components/form/textFieldPassword";
-import { ChangePasswordDto } from "../common/interface/dto/user.dto";
-import { useForm } from "react-hook-form";
-import { RootState } from "../store";
-import { ApiState } from "../common/interface/api.interface";
 import useFormError from "../common/hooks/userFormError";
-import { useSelector } from "react-redux";
-import { Form, Button, Steps } from "antd";
-import FormBtn from "../components/form/formBtn";
-import { RouteProtectedWrapper } from "../common/HOC/routerProtectedWrapper";
+import userAPI from "../api/userApi";
+import FormMsg from "../components/form/formMsg";
 
 export interface ChangePasswordProps {}
 
 const defaultValues: ChangePasswordDto = {
         confirmPassword: "",
-        currentPassword: "",
+        password: "",
         newPassword: "",
 };
 
 const ChangePassword: React.FC<ChangePasswordProps> = () => {
-        const { handleSubmit, control } = useForm<ChangePasswordDto>({ defaultValues });
+        const { handleSubmit, control, setValue } = useForm<ChangePasswordDto>({ defaultValues });
         const apiState = useSelector<RootState, ApiState>((state) => state.api);
         const errors = useFormError<ChangePasswordDto>(defaultValues);
 
-        const onSubmit = (data: ChangePasswordDto) => {};
+        const onSubmit = (data: ChangePasswordDto) => {
+                userAPI.updatePassword(data).then(() => {
+                        setValue("password", "");
+                        setValue("newPassword", "");
+                        setValue("confirmPassword", "");
+                });
+        };
 
         return (
                 <RouteProtectedWrapper isNeedLogin>
@@ -36,12 +44,18 @@ const ChangePassword: React.FC<ChangePasswordProps> = () => {
 
                                 <div className="">
                                         <div className="px-2 py-4 space-y-8 border w-96 fade-in">
-                                                <h1 className="text-4xl font-semibold text-center">Update Password</h1>
+                                                <h1 className="text-4xl font-semibold text-center">Update Password</h1>{" "}
+                                                <FormMsg
+                                                        isError={apiState.isError}
+                                                        errorMessage={apiState.errorMessage}
+                                                        isLoading={apiState.isLoading}
+                                                        message={apiState.message}
+                                                />
                                                 <Form className="" name="basic" layout="vertical" onFinish={handleSubmit(onSubmit)}>
                                                         <TextFieldPassword
                                                                 control={control}
-                                                                error={errors.currentPassword}
-                                                                field="currentPassword"
+                                                                error={errors.password}
+                                                                field="password"
                                                                 label="Current Password"
                                                         />
                                                         <TextFieldPassword

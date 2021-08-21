@@ -12,6 +12,12 @@ export class AdminAPI {
                 const res = await this.apiCall.get<ServerResponse<{ users: User[]; count: number }>>(url);
                 return res;
         }
+
+        async getUserById(userId: string) {
+                const url = `${this.prefix}/user?userId=${userId}`;
+                const res = await this.apiCall.get<ServerResponse<User>>(url);
+                return res;
+        }
 }
 
 export const adminAPI = new AdminAPI(http, "/admin");

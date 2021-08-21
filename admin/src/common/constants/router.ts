@@ -2,7 +2,7 @@ interface IRouter {
         link: string;
 }
 
-type TRouters = "register" | "login" | "home" | "viewProfile" | "changePassword" | "viewAllUser" | "updateUserProfile";
+type TRouters = "register" | "login" | "home" | "viewProfile" | "changePassword" | "viewAllUser" | "updateUserProfile" | "viewUserProfile";
 
 const config: Record<TRouters, IRouter> = {
         home: {
@@ -26,6 +26,9 @@ const config: Record<TRouters, IRouter> = {
         },
         updateUserProfile: {
                 link: "/account/update-profile",
+        },
+        viewUserProfile: {
+                link: "/account/user",
         },
 };
 

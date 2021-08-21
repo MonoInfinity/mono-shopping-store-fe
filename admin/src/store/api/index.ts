@@ -19,10 +19,12 @@ const reducer = createSlice({
                 resetState: (_) => ({ ...initialState }),
                 updateErrorDetails: (state, { payload }: PayloadAction<JoiError>) => {
                         const newState = { ...state };
+
                         if (payload?.errorMessage) newState.errorMessage = payload.errorMessage;
 
                         newState.errorDetails = payload;
                         newState.isError = true;
+                        console.log(newState);
                         return newState;
                 },
                 updateSuccessMessage: (state, { payload }: PayloadAction<ServerResponse<any>>) => ({
