@@ -18,7 +18,7 @@ import { useUploadFile } from "../common/hooks/useUploadFile";
 
 export interface UpdateUserProfileProps {}
 
-const defaultValues: UpdateUserDto = { address: "", email: "", name: "", phone: "" };
+const defaultValues: UpdateUserDto = { address: "", email: "", name: "", phone: "", avatarUrl: "" };
 
 const UpdateUserProfile: React.FC<UpdateUserProfileProps> = () => {
         const apiState = useSelector<RootState, ApiState>((state) => state.api);
@@ -28,7 +28,14 @@ const UpdateUserProfile: React.FC<UpdateUserProfileProps> = () => {
         const [file, handleOnChangeFile] = useUploadFile();
 
         const onSubmit = (data: UpdateUserDto) => {
-                if (file) userAPI.updateUser(data, file);
+                if (file) {
+                        userAPI.uploadFile(file).then((res) => {
+                                const avatarUrl = res.data.data;
+                                userAPI.updateUser({ ...data, avatarUrl });
+                        });
+                }
+
+                // if (file) userAPI.updateUser(data);
         };
 
         React.useEffect(() => {
@@ -51,11 +58,8 @@ const UpdateUserProfile: React.FC<UpdateUserProfileProps> = () => {
                                                 <Form className="" name="basic" layout="vertical" onFinish={handleSubmit(onSubmit)}>
                                                         <Image
                                                                 width={200}
-                                                                src={
-                                                                        file
-                                                                                ? URL.createObjectURL(file)
-                                                                                : process.env.REACT_APP_SERVER_URL + authState.avatarUrl
-                                                                }
+                                                                preview={false}
+                                                                src={file ? URL.createObjectURL(file) : authState.avatarUrl}
                                                                 className="border"
                                                         ></Image>
 

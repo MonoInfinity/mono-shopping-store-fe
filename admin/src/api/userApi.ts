@@ -14,23 +14,22 @@ export class UserAPI {
                 const res = await this.apiCall.get<ServerResponse<User>>(url);
                 return res;
         }
-        async updateUser(input: UpdateUserDto, file: File) {
-                const url = `${process.env.REACT_APP_SERVER_URL}/api${this.prefix}`;
-                const formData = new FormData();
-                formData.append("file", file);
-                formData.append("name", input.name);
-                formData.append("phone", input.phone);
-                formData.append("address", input.address);
-                formData.append("email", input.email);
 
-                const res = await axios.put<ServerResponse<void>>(url, input, {
-                        headers: {
-                                "Content-Type": "multipart/form-data; boundary=--------------------------286886491953162965705677",
-                        },
-                        withCredentials: true,
-                });
+        async updateUser(input: UpdateUserDto) {
+                const url = `${process.env.REACT_APP_SERVER_URL}/api${this.prefix}`;
+                const res = await this.apiCall.put<ServerResponse<void>>(url, input);
                 return res;
         }
+
+        async uploadFile(input: File) {
+                const data = new FormData();
+                data.append("file", input);
+
+                const url = `${process.env.REACT_APP_STORAGE_SERVER_URL}/api/file/upload`;
+                const res = await axios.post<ServerResponse<string>>(url, data);
+                return res;
+        }
+
         async updatePassword(input: ChangePasswordDto) {
                 const url = `${this.prefix}/password`;
                 const res = await this.apiCall.put<ServerResponse<null>>(url, input);

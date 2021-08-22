@@ -9,4 +9,5 @@ export interface UpdateUserDto {
         email: string;
         phone: string;
         address: string;
+        avatarUrl: string;
 }
