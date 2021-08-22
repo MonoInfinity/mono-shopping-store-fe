@@ -9,6 +9,7 @@ export enum UserStatus {
         DISABLE = 0,
         ENABLE = 1,
 }
+
 export interface User {
         userId: string;
         username: string;

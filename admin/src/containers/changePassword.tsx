@@ -39,7 +39,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = () => {
                 <RouteProtectedWrapper isNeedLogin>
                         <div className="space-y-4">
                                 <button className="font-semibold ">
-                                        <Link to={routers.viewProfile.link}>Go Back</Link>
+                                        <Link to={routers.viewMyProfile.link}>Go Back</Link>
                                 </button>
 
                                 <div className="">

@@ -11,7 +11,7 @@ import { RouteProtectedWrapper } from "../common/HOC/routerProtectedWrapper";
 
 export interface UserProfileProps {}
 
-const UserProfile: React.FC<UserProfileProps> = () => {
+const ViewMyProfile: React.FC<UserProfileProps> = () => {
         const authState = useSelector<RootState, AuthState>((state) => state.auth);
 
         return (
@@ -65,4 +65,4 @@ const UserProfile: React.FC<UserProfileProps> = () => {
         );
 };
 
-export default UserProfile;
+export default ViewMyProfile;

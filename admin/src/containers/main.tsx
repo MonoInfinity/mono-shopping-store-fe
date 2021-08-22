@@ -31,13 +31,13 @@ const MainContainer: React.FunctionComponent<MainContainerProps> = () => {
                                         >
                                                 <SubMenu key="sub1" icon={<UserOutlined />} title="Account">
                                                         <Menu.Item key="1">
-                                                                <Link to={routers.viewProfile.link}>View My Profile</Link>
+                                                                <Link to={routers.viewMyProfile.link}>View My Profile</Link>
                                                         </Menu.Item>
-                                                        <RoleProtected acceptRole={[UserRole.MANAGER, UserRole.OWNER]}>
                                                                 <Menu.Item key="2">
+                                                        <RoleProtected acceptRole={[UserRole.MANAGER, UserRole.OWNER]}>
                                                                         <Link to={routers.viewAllUser.link}>View All User</Link>
-                                                                </Menu.Item>
                                                         </RoleProtected>
+                                                                </Menu.Item>
                                                 </SubMenu>
                                                 <SubMenu key="sub2" icon={<LaptopOutlined />} title="Order">
                                                         <Menu.Item key="5">option5</Menu.Item>
@@ -55,7 +55,7 @@ const MainContainer: React.FunctionComponent<MainContainerProps> = () => {
                                 </Sider>
                                 <Layout className="p-6 bg-white">
                                         <Switch>
-                                                <Route path={routers.viewProfile.link} component={ViewMyProfile} />
+                                                <Route path={routers.viewMyProfile.link} component={ViewMyProfile} />
                                                 <Route path={routers.changePassword.link} component={ChangePassword} />
                                                 <Route path={routers.viewAllUser.link} component={ViewAllUser} />
                                                 <Route path={routers.updateUserProfile.link} component={UpdateUserProfile} />

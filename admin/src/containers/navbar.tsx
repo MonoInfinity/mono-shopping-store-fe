@@ -23,7 +23,9 @@ const NavbarContainer: React.FunctionComponent<NavbarContainerProps> = () => {
         const menu = (
                 <Menu>
                         <Menu.Item>
-                                <h1 className="capitalize">{authState.name}</h1>
+                                <Link to={routers.viewMyProfile.link}>
+                                        <h1 className="capitalize">{authState.name}</h1>
+                                </Link>
                         </Menu.Item>
                         <Menu.Item>
                                 <button onClick={onLogout}>Logout</button>

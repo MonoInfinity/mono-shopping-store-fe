@@ -1,8 +1,7 @@
-import { Form } from "antd";
+import { Form, Image } from "antd";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { RouteProtectedWrapper } from "../common/HOC/routerProtectedWrapper";
-
 import routers from "../common/constants/router";
 import { UpdateUserDto } from "../common/interface/dto/user.dto";
 import { useForm } from "react-hook-form";
@@ -15,6 +14,7 @@ import FormBtn from "../components/form/formBtn";
 import { AuthState } from "../common/interface/user.interface";
 import userAPI from "../api/userApi";
 import FormMsg from "../components/form/formMsg";
+import { useUploadFile } from "../common/hooks/useUploadFile";
 
 export interface UpdateUserProfileProps {}
 
@@ -23,12 +23,12 @@ const defaultValues: UpdateUserDto = { address: "", email: "", name: "", phone: 
 const UpdateUserProfile: React.FC<UpdateUserProfileProps> = () => {
         const apiState = useSelector<RootState, ApiState>((state) => state.api);
         const authState = useSelector<RootState, AuthState>((state) => state.auth);
-
         const { handleSubmit, control, setValue } = useForm<UpdateUserDto>({ defaultValues });
         const errors = useFormError<UpdateUserDto>(defaultValues);
+        const [file, handleOnChangeFile] = useUploadFile();
 
         const onSubmit = (data: UpdateUserDto) => {
-                userAPI.updateUser(data);
+                if (file) userAPI.updateUser(data, file);
         };
 
         React.useEffect(() => {
@@ -42,13 +42,24 @@ const UpdateUserProfile: React.FC<UpdateUserProfileProps> = () => {
                 <RouteProtectedWrapper isNeedLogin>
                         <div className="space-y-4">
                                 <button className="font-semibold ">
-                                        <Link to={routers.viewProfile.link}>Go Back</Link>
+                                        <Link to={routers.viewMyProfile.link}>Go Back</Link>
                                 </button>
 
                                 <div className="">
                                         <div className="px-2 py-4 space-y-8 border w-96 fade-in">
                                                 <h1 className="text-4xl font-semibold text-center">Update Information</h1>
                                                 <Form className="" name="basic" layout="vertical" onFinish={handleSubmit(onSubmit)}>
+                                                        <Image
+                                                                width={200}
+                                                                src={
+                                                                        file
+                                                                                ? URL.createObjectURL(file)
+                                                                                : process.env.REACT_APP_SERVER_URL + authState.avatarUrl
+                                                                }
+                                                                className="border"
+                                                        ></Image>
+
+                                                        <input type="file" onChange={handleOnChangeFile} name="avatar" />
                                                         <FormMsg
                                                                 isError={apiState.isError}
                                                                 errorMessage={apiState.errorMessage}
