@@ -1,9 +1,9 @@
-import * as React from "react";
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { RootState } from "../../store";
-import { AuthState, UserRole } from "../interface/user.interface";
-import routers from "../constants/router";
+import * as React from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { RootState } from '../../store';
+import { AuthState, UserRole } from '../interface/user.interface';
+import { routers } from '../constants/router';
 
 export interface RoleProtectedProps {
         acceptRole: UserRole[];

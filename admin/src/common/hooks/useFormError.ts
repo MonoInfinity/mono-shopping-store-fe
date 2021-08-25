@@ -1,8 +1,9 @@
-import * as React from "react";
-import { useSelector } from "react-redux";
+import * as React from 'react';
+import { useSelector } from 'react-redux';
 
-import { RootState } from "../../store";
-import { ApiState } from "../interface/api.interface";
+import { RootState, store } from '../../store';
+import { apiActions } from '../../store/api';
+import { ApiState } from '../interface/api.interface';
 
 export function useFormError<T>(defaultValues: T) {
         const [errors, setErrors] = React.useState<T>(defaultValues);
@@ -14,6 +15,12 @@ export function useFormError<T>(defaultValues: T) {
                 if (isError) setErrors({ ...defaultValues, ...errorDetails });
                 else setErrors(defaultValues);
         }, [apiState, defaultValues]);
+
+        React.useEffect(() => {
+                return () => {
+                        store.dispatch(apiActions.resetState());
+                };
+        }, []);
 
         return errors;
 }

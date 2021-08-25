@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import routers from "../constants/router";
-import { RootState, store } from "../../store";
-import { AuthState } from "../../common/interface/user.interface";
-import { ApiState } from "../../common/interface/api.interface";
+import { routers } from '../constants/router';
+import { RootState, store } from '../../store';
+import { AuthState } from '../../common/interface/user.interface';
+import { ApiState } from '../../common/interface/api.interface';
 
-import { apiActions } from "../../store/api";
-import { Spin } from "antd";
+import { apiActions } from '../../store/api';
+import { Spin } from 'antd';
 
 export interface RouteProtectedProps {
         isNeedLogin?: boolean;
@@ -30,7 +30,7 @@ export const RouteProtectedWrapper: React.FunctionComponent<RouteProtectedProps>
                         if (!authState.isLogin && isNeedLogin) router.push(routers.login.link);
                         else if (!isNeedLogin && authState.isLogin) router.push(routers.home.link);
                 }
-        }, [authState, isGetUser]);
+        }, [authState, isGetUser, apiState.isLoading, isNeedLogin, router]);
 
         return (
                 <>

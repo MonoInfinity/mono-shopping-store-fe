@@ -1,0 +1,12 @@
+{
+        "en": {
+                "accountTitle": "Account",
+                "viewMyProfile": "My Profile",
+                "viewAllUsers": "View All Account"
+        },
+        "vi": {
+                "title": "Tài Khoản",
+                "viewMyProfile": "Hồ Sơ Của Tôi",
+                "viewAllUsers": "Tìm Kiếm Tài Khoản"
+        }
+}

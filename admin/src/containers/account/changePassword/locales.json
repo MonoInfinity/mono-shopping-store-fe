@@ -1,0 +1,18 @@
+{
+        "en": {
+                "currentPassword": "Mật Khẩu Hiện Tại",
+                "newPassword": "Mật Khẩu Mới",
+                "confirmPassword": "Nhập Lại Mật Khẩu Mới",
+                "title": "Cập Nhật Mật Khẩu",
+                "changePasswordButton": "Cập Nhật",
+                "goBack": "Trở Lại"
+        },
+        "vi": {
+                "currentPassword": "Mật Khẩu Hiện Tại",
+                "newPassword": "Mật Khẩu Mới",
+                "confirmPassword": "Nhập Lại Mật Khẩu Mới",
+                "title": "Cập Nhật Mật Khẩu",
+                "changePasswordButton": "Cập Nhật",
+                "goBack": "Trở Lại"
+        }
+}

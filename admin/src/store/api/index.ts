@@ -1,17 +1,17 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { JoiError, ApiState, ServerResponse } from "../../common/interface/api.interface";
+import { JoiError, ApiState, ServerResponse } from '../../common/interface/api.interface';
 
 const initialState: ApiState = {
         isLoading: false,
         errorDetails: {},
         isError: false,
-        message: "",
-        errorMessage: "",
+        message: '',
+        errorMessage: '',
 };
 
 const reducer = createSlice({
-        name: "api",
+        name: 'api',
         initialState,
         reducers: {
                 initReq: (state) => ({ ...state, isLoading: true, isError: false }),
@@ -24,12 +24,12 @@ const reducer = createSlice({
 
                         newState.errorDetails = payload;
                         newState.isError = true;
-                        console.log(newState);
+
                         return newState;
                 },
                 updateSuccessMessage: (state, { payload }: PayloadAction<ServerResponse<any>>) => ({
                         ...state,
-                        message: payload.details.message || "",
+                        message: payload.details.message || '',
                 }),
         },
         extraReducers: (builder) => {},

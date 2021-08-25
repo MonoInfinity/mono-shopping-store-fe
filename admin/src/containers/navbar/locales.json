@@ -1,0 +1,12 @@
+{
+        "en": {
+                "register": "Register",
+                "login": "Login",
+                "logout": "Logout"
+        },
+        "vi": {
+                "register": "Đăng Ký",
+                "login": "Đăng Nhập",
+                "logout": "Đăng Xuất"
+        }
+}

@@ -1,0 +1,38 @@
+{
+        "en": {
+                "username": "Tên Tài Khoản",
+                "name": "Tên",
+                "title": "Thông Tin Tài Khoản",
+                "subtitle": "Thông Tin Tài Khoản",
+                "phone": "Điện Thoại",
+                "status": "Trạng Thái",
+                "salary": "Lương",
+                "role": "Chức Vụ",
+                "address": "Địa Chỉ",
+                "joinDate": "Ngày Khỏi Tạo",
+                "editProfileButton": "Chỉnh Sửa Hồ Sơ",
+                "changePasswordButton": "Đỗi Mật Khẩu",
+                "active": "Hoạt Động",
+                "inactive": "Dừng Hoạt Động",
+                "goBack": "Trở Lại",
+                "updateButton": "Update User"
+        },
+        "vi": {
+                "username": "Tên Tài Khoản",
+                "name": "Tên",
+                "title": "Thông Tin Tài Khoản",
+                "subtitle": "Thông Tin Tài Khoản",
+                "phone": "Điện Thoại",
+                "status": "Trạng Thái",
+                "salary": "Lương",
+                "role": "Chức Vụ",
+                "address": "Địa Chỉ",
+                "joinDate": "Ngày Khỏi Tạo",
+                "editProfileButton": "Chỉnh Sửa Hồ Sơ",
+                "changePasswordButton": "Đỗi Mật Khẩu",
+                "active": "Hoạt Động",
+                "inactive": "Dừng Hoạt Động",
+                "goBack": "Trở Lại",
+                "updateButton": "Cập Nhật Thông Tin"
+        }
+}

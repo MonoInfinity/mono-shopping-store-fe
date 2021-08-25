@@ -2,34 +2,32 @@ interface IRouter {
         link: string;
 }
 
-type TRouters = "register" | "login" | "home" | "viewMyProfile" | "changePassword" | "viewAllUser" | "updateUserProfile" | "viewUserProfile";
+type TRouters = 'register' | 'login' | 'home' | 'viewMyProfile' | 'changePassword' | 'viewAllUser' | 'updateUserProfile' | 'viewUserProfile';
 
-const config: Record<TRouters, IRouter> = {
+export const routers: Record<TRouters, IRouter> = {
         home: {
-                link: "/",
+                link: '/',
         },
 
         login: {
-                link: "/auth/login",
+                link: '/auth/login',
         },
         register: {
-                link: "/auth/register",
+                link: '/auth/register',
         },
         viewMyProfile: {
-                link: "/account/profile",
+                link: '/account/profile',
         },
         changePassword: {
-                link: "/account/password",
+                link: '/account/password',
         },
         viewAllUser: {
-                link: "/account/all",
+                link: '/account/all',
         },
         updateUserProfile: {
-                link: "/account/update-profile",
+                link: '/account/update-profile',
         },
         viewUserProfile: {
-                link: "/account/user",
+                link: '/account/user',
         },
 };
-
-export default config;
