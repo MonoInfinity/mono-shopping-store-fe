@@ -6,14 +6,12 @@ import { useTranslate } from '../../common/hooks/useTranslate';
 import { AuthState } from '../../common/interface/user.interface';
 import { RootState, store } from '../../store';
 import authThunk from '../../store/auth/thunk';
-import locales from './locales.json';
-import NavbarPresentation from './presentation';
 
-export type LocaleKey = keyof typeof locales.en;
+import NavbarPresentation from './presentation';
 
 const NavbarContainer: React.FC = () => {
         const authState = useSelector<RootState, AuthState>((state) => state.auth);
-        const translate = useTranslate<LocaleKey>({ dictionary: locales, name: 'navbar' });
+        const translate = useTranslate();
         const [currentLanguage, setCurrentLanguage] = React.useState<'en' | 'vi'>('en');
 
         const onLogout = () => {

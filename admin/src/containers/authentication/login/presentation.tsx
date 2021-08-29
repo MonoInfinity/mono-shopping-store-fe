@@ -6,22 +6,28 @@ import { Control } from 'react-hook-form';
 import { UserLoginDto } from '../../../common/interface/dto/auth.dto';
 import { ApiState } from '../../../common/interface/api.interface';
 import { RouteProtectedWrapper } from '../../../common/HOC/routerProtectedWrapper';
-import { LocaleKey } from '.';
 import { routers } from '../../../common/constants/router';
 import { FormBtn, FormMsg, TextField, TextFieldPassword } from '../../../components/form';
+import { LocaleKey } from '../../../common/interface/locale.interface';
 
 export interface LoginContainerProps {
         apiState: ApiState;
         errors: UserLoginDto;
-        handleOnSubmit(input?: React.BaseSyntheticEvent<object, any, any> | undefined): Promise<void>;
         control: Control<UserLoginDto>;
-        translate(key: LocaleKey, context?: any): string;
+        handleOnSubmit(input?: React.BaseSyntheticEvent<object, any, any> | undefined): Promise<void>;
+        translate(key: LocaleKey, context?: {}): string;
 }
 
-const LoginForm: React.FunctionComponent<LoginContainerProps> = ({ apiState, errors, handleOnSubmit, control, translate }) => {
+const LoginForm: React.FunctionComponent<LoginContainerProps> = ({
+        apiState,
+        errors,
+        handleOnSubmit,
+        control,
+        translate,
+}) => {
         const FormHeader = (
                 <>
-                        <h1 className="text-4xl font-semibold text-center">{translate('title')}</h1>
+                        <h1 className="text-4xl font-semibold text-center">{translate('title-login')}</h1>
                 </>
         );
 
@@ -33,19 +39,29 @@ const LoginForm: React.FunctionComponent<LoginContainerProps> = ({ apiState, err
                                 isLoading={apiState.isLoading}
                                 message={apiState.message}
                         />
-                        <TextField control={control} error={errors.username} field="username" label={translate('username')} />
-                        <TextFieldPassword control={control} error={errors.password} field="password" label={translate('password')} />
+                        <TextField
+                                control={control}
+                                error={errors.username}
+                                field="username"
+                                label={translate('field-username')}
+                        />
+                        <TextFieldPassword
+                                control={control}
+                                error={errors.password}
+                                field="password"
+                                label={translate('field-password')}
+                        />
                         <Form.Item>
                                 <div className="flex items-center justify-between">
-                                        <Checkbox>{translate('rememberMe')}</Checkbox>
+                                        <Checkbox>{translate('extra-remember')}</Checkbox>
                                         <div className="flex-1 text-right">
                                                 <Link to="/" className="">
-                                                        {translate('forgotPassword')}
+                                                        {translate('extra-forgotPassword')}
                                                 </Link>
                                         </div>
                                 </div>
                         </Form.Item>
-                        <FormBtn isLoading={apiState.isLoading} label={translate('button')} />
+                        <FormBtn isLoading={apiState.isLoading} label={translate('button-login')} />
                 </Form>
         );
 
@@ -53,11 +69,11 @@ const LoginForm: React.FunctionComponent<LoginContainerProps> = ({ apiState, err
                 <>
                         <div className="flex items-center space-x-4">
                                 <div className="flex-1 bg-gray-300 h-0.5"></div>
-                                <p className="text-center">{translate('or')}</p>
+                                <p className="text-center">{translate('extra-or')}</p>
                                 <div className="flex-1 bg-gray-300 h-0.5"></div>
                         </div>
                         <Button type="default" htmlType="button" className="w-full">
-                                <Link to={routers.register.link}>{translate('register')}</Link>
+                                <Link to={routers.register.link}>{translate('link-registerInstead')}</Link>
                         </Button>
                 </>
         );

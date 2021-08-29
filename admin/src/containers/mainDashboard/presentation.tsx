@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { Layout, Menu, Spin } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 
 import { Link, Route, Switch } from 'react-router-dom';
 
 import { RouteProtectedWrapper } from '../../common/HOC/routerProtectedWrapper';
 import RoleProtected from '../../common/HOC/roleProtected';
 import { routers } from '../../common/constants/router';
-import { LocaleKey } from './index';
+
 import { UserRole } from '../../common/interface/user.interface';
-import LoadingScreen from '../../components/loading/loadingScreen';
+import { LocaleKey } from '../../common/interface/locale.interface';
+import AddNewProductContainer from '../product/addNewProduct';
 
 const ViewMyProfileContainer = React.lazy(() => import('../account/viewMyProfile'));
 const ChangePasswordContainer = React.lazy(() => import('../account/changePassword'));
@@ -21,7 +22,7 @@ const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 export interface MainDashboardPresentationProps {
-        translate(key: LocaleKey, context?: any): string;
+        translate(key: LocaleKey, context?: {}): string;
 }
 
 const MainDashboardPresentation: React.FC<MainDashboardPresentationProps> = ({ translate }) => {
@@ -34,14 +35,25 @@ const MainDashboardPresentation: React.FC<MainDashboardPresentationProps> = ({ t
                                 theme="dark"
                                 style={{ height: '100%', borderRight: 0 }}
                         >
-                                <SubMenu key="sub1" icon={<UserOutlined />} title={translate('accountTitle')}>
+                                <SubMenu key="sub1" icon={<UserOutlined />} title={translate('title-account')}>
                                         <Menu.Item key="1">
-                                                <Link to={routers.viewMyProfile.link}>{translate('viewMyProfile')}</Link>
+                                                <Link to={routers.viewMyProfile.link}>
+                                                        {translate('link-viewMyProfile')}
+                                                </Link>
                                         </Menu.Item>
                                         <Menu.Item key="2">
                                                 <RoleProtected acceptRole={[UserRole.MANAGER, UserRole.OWNER]}>
-                                                        <Link to={routers.viewAllUser.link}>{translate('viewAllUsers')}</Link>
+                                                        <Link to={routers.viewAllUser.link}>
+                                                                {translate('link-viewAllUser')}
+                                                        </Link>
                                                 </RoleProtected>
+                                        </Menu.Item>
+                                </SubMenu>
+                                <SubMenu key="sub2" icon={<UserOutlined />} title={translate('title-product')}>
+                                        <Menu.Item key="3">
+                                                <Link to={routers.addNewProduct.link}>
+                                                        {translate('link-addNewProduct')}
+                                                </Link>
                                         </Menu.Item>
                                 </SubMenu>
                         </Menu>
@@ -50,15 +62,22 @@ const MainDashboardPresentation: React.FC<MainDashboardPresentationProps> = ({ t
 
         const DashboardScreen = (
                 <Layout className="p-6 bg-white">
-                        <Switch>
-                                <React.Suspense fallback={<Spin size="large" />}>
+                        <React.Suspense fallback={<Spin size="large" />}>
+                                <Switch>
                                         <Route path={routers.viewMyProfile.link} component={ViewMyProfileContainer} />
                                         <Route path={routers.changePassword.link} component={ChangePasswordContainer} />
                                         <Route path={routers.viewAllUser.link} component={ViewAllUserContainer} />
-                                        <Route path={routers.updateUserProfile.link} component={UpdateUserProfileContainer} />
-                                        <Route path={routers.viewUserProfile.link + '/:id'} component={ViewUserProfileContainer} />
-                                </React.Suspense>
-                        </Switch>
+                                        <Route
+                                                path={routers.updateUserProfile.link}
+                                                component={UpdateUserProfileContainer}
+                                        />
+                                        <Route path={routers.addNewProduct.link} component={AddNewProductContainer} />
+                                        <Route
+                                                path={routers.viewUserProfile.link + '/:id'}
+                                                component={ViewUserProfileContainer}
+                                        />
+                                </Switch>
+                        </React.Suspense>
                 </Layout>
         );
 

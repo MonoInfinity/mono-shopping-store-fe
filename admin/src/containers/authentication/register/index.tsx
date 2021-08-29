@@ -8,10 +8,8 @@ import { ApiState } from '../../../common/interface/api.interface';
 import { UserRegisterDto } from '../../../common/interface/dto/auth.dto';
 import { RootState, store } from '../../../store';
 import authThunk from '../../../store/auth/thunk';
-import locales from './locales.json';
-import RegisterForm from './presentation';
 
-export type LocaleKey = keyof typeof locales.en;
+import RegisterForm from './presentation';
 
 const defaultValues: UserRegisterDto = {
         name: '',
@@ -27,13 +25,21 @@ const RegisterContainer: React.FC = () => {
         const { handleSubmit, control } = useForm<UserRegisterDto>({ defaultValues });
         const apiState = useSelector<RootState, ApiState>((state) => state.api);
         const errors = useFormError<UserRegisterDto>(defaultValues);
-        const translate = useTranslate<LocaleKey>({ dictionary: locales, name: 'registerForm' });
+        const translate = useTranslate();
 
         const onSubmit = (data: UserRegisterDto) => {
                 store.dispatch(authThunk.registerUser(data));
         };
 
-        return <RegisterForm apiState={apiState} control={control} errors={errors} handleOnSubmit={handleSubmit(onSubmit)} translate={translate} />;
+        return (
+                <RegisterForm
+                        apiState={apiState}
+                        control={control}
+                        errors={errors}
+                        handleOnSubmit={handleSubmit(onSubmit)}
+                        translate={translate}
+                />
+        );
 };
 
 export default RegisterContainer;

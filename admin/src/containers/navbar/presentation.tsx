@@ -8,7 +8,7 @@ import LogoIcon from '../../components/icons/logo';
 import LogoSmIcon from '../../components/icons/logo-sm';
 import { routers } from '../../common/constants/router';
 import { AuthState } from '../../common/interface/user.interface';
-import { LocaleKey } from './index';
+import { LocaleKey } from '../../common/interface/locale.interface';
 
 export interface NavbarPresentationProps {
         authState: AuthState;
@@ -18,7 +18,13 @@ export interface NavbarPresentationProps {
         currentLanguage: 'en' | 'vi';
 }
 
-const NavbarPresentation: React.FC<NavbarPresentationProps> = ({ authState, handleOnLogout, translate, handleOnChangeLanguage, currentLanguage }) => {
+const NavbarPresentation: React.FC<NavbarPresentationProps> = ({
+        authState,
+        handleOnLogout,
+        translate,
+        handleOnChangeLanguage,
+        currentLanguage,
+}) => {
         const menu = (
                 <Menu>
                         <Menu.Item>
@@ -27,7 +33,7 @@ const NavbarPresentation: React.FC<NavbarPresentationProps> = ({ authState, hand
                                 </Link>
                         </Menu.Item>
                         <Menu.Item>
-                                <button onClick={handleOnLogout}>{translate('logout')}</button>
+                                <button onClick={handleOnLogout}>{translate('button-logout')}</button>
                         </Menu.Item>
                 </Menu>
         );
@@ -61,7 +67,8 @@ const NavbarPresentation: React.FC<NavbarPresentationProps> = ({ authState, hand
                                                                 <Badge count={10}>
                                                                         <Avatar
                                                                                 src={
-                                                                                        process.env.REACT_APP_STORAGE_SERVER_URL +
+                                                                                        process.env
+                                                                                                .REACT_APP_STORAGE_SERVER_URL +
                                                                                         '/' +
                                                                                         authState.avatarUrl
                                                                                 }
@@ -73,10 +80,12 @@ const NavbarPresentation: React.FC<NavbarPresentationProps> = ({ authState, hand
                                 ) : (
                                         <>
                                                 <Menu.Item key="1">
-                                                        <Link to={routers.register.link}>{translate('register')}</Link>
+                                                        <Link to={routers.register.link}>
+                                                                {translate('link-register')}
+                                                        </Link>
                                                 </Menu.Item>
                                                 <Menu.Item key="2">
-                                                        <Link to={routers.login.link}>{translate('login')}</Link>
+                                                        <Link to={routers.login.link}>{translate('link-login')}</Link>
                                                 </Menu.Item>
                                         </>
                                 )}

@@ -14,7 +14,10 @@ export interface RouteProtectedProps {
         isNeedLogin?: boolean;
 }
 
-export const RouteProtectedWrapper: React.FunctionComponent<RouteProtectedProps> = ({ isNeedLogin = false, children }) => {
+export const RouteProtectedWrapper: React.FunctionComponent<RouteProtectedProps> = ({
+        isNeedLogin = false,
+        children,
+}) => {
         const authState = useSelector<RootState, AuthState>((state) => state.auth);
         const apiState = useSelector<RootState, ApiState>((state) => state.api);
         const router = useHistory();
@@ -30,17 +33,13 @@ export const RouteProtectedWrapper: React.FunctionComponent<RouteProtectedProps>
                         if (!authState.isLogin && isNeedLogin) router.push(routers.login.link);
                         else if (!isNeedLogin && authState.isLogin) router.push(routers.home.link);
                 }
-        }, [authState, isGetUser, apiState.isLoading, isNeedLogin, router]);
+        }, [authState.isLogin, router, isGetUser, isNeedLogin]);
 
-        return (
-                <>
-                        {apiState.isLoading && !isGetUser ? (
-                                <div className="flex items-center justify-center flex-1 w-full ">
-                                        <Spin size="large" />
-                                </div>
-                        ) : (
-                                children
-                        )}
-                </>
+        return apiState.isLoading && !isGetUser ? (
+                <div className="flex items-center justify-center flex-1 w-full ">
+                        <Spin size="large" />
+                </div>
+        ) : (
+                <>{children}</>
         );
 };

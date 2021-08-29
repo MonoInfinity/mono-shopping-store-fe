@@ -1,28 +1,29 @@
-import { UserRole, UserStatus } from "../interface/user.interface";
+import { EntityStatus } from '../interface/common.interface';
+import { UserRole } from '../interface/user.interface';
 
 export const convertRoleToString = (role: UserRole) => {
         switch (role) {
                 case UserRole.CASHIER:
-                        return "cashier";
+                        return 'user-role-cashier';
                 case UserRole.MANAGER:
-                        return "manager";
+                        return 'user-role-manager';
                 case UserRole.OWNER:
-                        return "owner";
+                        return 'user-role-owner';
                 case UserRole.SHIPPER:
-                        return "shipper";
+                        return 'user-role-shipper';
                 case UserRole.CUSTOMER:
-                        return "customer";
+                        return 'user-role-customer';
                 default:
-                        return "customer";
+                        return 'user-role-customer';
         }
 };
-export const convertStatusToString = (status: UserStatus) => {
+export const convertStatusToString = (status: EntityStatus) => {
         switch (status) {
-                case UserStatus.ENABLE:
-                        return "active";
-                case UserStatus.DISABLE:
-                        return "inactive";
+                case EntityStatus.ENABLE:
+                        return 'user-status-active';
+                case EntityStatus.DISABLE:
+                        return 'user-status-inactive';
                 default:
-                        return "active";
+                        return 'user-status-active';
         }
 };

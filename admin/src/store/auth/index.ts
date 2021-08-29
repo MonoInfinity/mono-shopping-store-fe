@@ -1,27 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
-import Cookies from "universal-cookie";
+import { createSlice } from '@reduxjs/toolkit';
+import Cookies from 'universal-cookie';
+import { EntityStatus } from '../../common/interface/common.interface';
 
-import { AuthState, UserRole, UserStatus } from "../../common/interface/user.interface";
-import { authThunk } from "./thunk";
-import { userThunk } from "./userThunk";
+import { AuthState, UserRole } from '../../common/interface/user.interface';
+import { authThunk } from './thunk';
+import { userThunk } from './userThunk';
 
 const initialState: AuthState = {
-        email: "",
-        username: "",
-        name: "",
-        userId: "",
-        phone: "",
-        address: "",
-        createDate: "",
-        avatarUrl: "",
+        email: '',
+        username: '',
+        name: '',
+        userId: '',
+        phone: '',
+        address: '',
+        createDate: '',
+        avatarUrl: '',
         isLogin: false,
         role: UserRole.CUSTOMER,
         salary: 0,
-        status: UserStatus.ENABLE,
+        status: EntityStatus.ENABLE,
 };
 
 const reducer = createSlice({
-        name: "auth",
+        name: 'auth',
         initialState,
         reducers: {
                 resetState: () => ({ ...initialState }),
@@ -50,9 +51,9 @@ const reducer = createSlice({
 
                 builder.addCase(userThunk.getCurrentUser.rejected, (state) => {
                         const cookies = new Cookies();
-                        cookies.set("re-token", "", { maxAge: -999 });
-                        cookies.set("auth-token", "", { maxAge: -999 });
-                        cookies.set("io-token", "", { maxAge: -999 });
+                        cookies.set('re-token', '', { maxAge: -999 });
+                        cookies.set('auth-token', '', { maxAge: -999 });
+                        cookies.set('io-token', '', { maxAge: -999 });
 
                         return {
                                 ...state,

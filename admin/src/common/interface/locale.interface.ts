@@ -1,8 +1,3 @@
-export interface LocaleLanguages {
-        en: {
-                [key: string]: string;
-        };
-        vi: {
-                [key: string]: string;
-        };
-}
+import locales from './language.json';
+
+export type LocaleKey = keyof typeof locales;

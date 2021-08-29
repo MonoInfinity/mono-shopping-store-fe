@@ -1,14 +1,17 @@
-import { Badge, Button, List, Pagination, Skeleton, Avatar } from 'antd';
-import Search from 'antd/lib/input/Search';
+import { Badge, Button, List, Pagination, Skeleton, Avatar, Form } from 'antd';
 
 import * as React from 'react';
+import { Control } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { SearchUserDto } from '.';
 import { routers } from '../../../common/constants/router';
 import { convertRoleToString, convertStatusToString } from '../../../common/helper/userHelper';
 import RoleProtected from '../../../common/HOC/roleProtected';
 import { ApiState } from '../../../common/interface/api.interface';
+import { LocaleKey } from '../../../common/interface/locale.interface';
 import { User, UserRole } from '../../../common/interface/user.interface';
-import { LocaleKey } from './index';
+import { FormBtn, TextField } from '../../../components/form';
+import FormSelect, { OptionItem } from '../../../components/form/formSelect';
 
 export interface ViewAllUserPresentationProps {
         apiState: ApiState;
@@ -17,8 +20,10 @@ export interface ViewAllUserPresentationProps {
         currentPage: number;
         pageSize: number;
         handleOnChangeSize(page: number, pageSize?: number | undefined): void;
-        handleOnSearch(value: string): void;
+        handleOnSearch(input?: React.BaseSyntheticEvent<object, any, any> | undefined): Promise<void>;
         translate(key: LocaleKey, context?: any): string;
+        control: Control<SearchUserDto>;
+        roleOptions: OptionItem[];
 }
 
 const ViewAllUserPresentation: React.FC<ViewAllUserPresentationProps> = ({
@@ -28,8 +33,10 @@ const ViewAllUserPresentation: React.FC<ViewAllUserPresentationProps> = ({
         pageSize,
         totalUser,
         handleOnChangeSize,
-        handleOnSearch,
         translate,
+        control,
+        handleOnSearch,
+        roleOptions,
 }) => {
         const LoadingSkeleton = (
                 <List>
@@ -43,7 +50,22 @@ const ViewAllUserPresentation: React.FC<ViewAllUserPresentationProps> = ({
                 </List>
         );
 
-        const SearchForm = <Search placeholder={translate('accountName')} onSearch={handleOnSearch} enterButton />;
+        const SearchForm = (
+                <>
+                        <Form onFinish={handleOnSearch} layout="vertical">
+                                <div className="flex space-x-8">
+                                        <TextField control={control} error="" field="name" label="Name" />
+                                        <Form.Item className="flex-1 " label="Role">
+                                                <FormSelect control={control} field="role" optionItem={roleOptions} />
+                                        </Form.Item>
+                                </div>
+
+                                <Form.Item className="w-32">
+                                        <FormBtn isLoading={apiState.isLoading} label="Search" />
+                                </Form.Item>
+                        </Form>
+                </>
+        );
 
         const UserInformationRow = (user: User) => (
                 <List.Item key={user.userId}>
@@ -53,13 +75,13 @@ const ViewAllUserPresentation: React.FC<ViewAllUserPresentationProps> = ({
                                 description={
                                         <div>
                                                 <p>
-                                                        {translate('address')}: {user.address}
+                                                        {translate('field-address')}: {user.address}
                                                 </p>
                                                 <p>
-                                                        {translate('phone')}: {user.phone}
+                                                        {translate('field-phone')}: {user.phone}
                                                 </p>
                                                 <p>
-                                                        {translate('joinDate')}: {user.createDate}
+                                                        {translate('field-joinDate')}: {user.createDate}
                                                 </p>
                                         </div>
                                 }
@@ -67,15 +89,20 @@ const ViewAllUserPresentation: React.FC<ViewAllUserPresentationProps> = ({
 
                         <div className="flex flex-col justify-between space-y-2 capitalize">
                                 {user.status ? (
-                                        <Badge status="processing" text={translate(convertStatusToString(user.status))} />
+                                        <Badge
+                                                status="processing"
+                                                text={translate(convertStatusToString(user.status))}
+                                        />
                                 ) : (
                                         <Badge status="error" text={translate(convertStatusToString(user.status))} />
                                 )}
                                 <div>
-                                        {translate('role')}: {convertRoleToString(user.role)}
+                                        {translate('field-role')}: {translate(convertRoleToString(user.role))}
                                 </div>
-                                <Button type="ghost">
-                                        <Link to={routers.viewUserProfile.link + '/' + user.userId}>{translate('viewMore')}</Link>
+                                <Button type="ghost" className="w-32">
+                                        <Link to={routers.viewUserProfile.link + '/' + user.userId}>
+                                                {translate('link-viewMore')}
+                                        </Link>
                                 </Button>
                         </div>
                 </List.Item>
@@ -91,10 +118,12 @@ const ViewAllUserPresentation: React.FC<ViewAllUserPresentationProps> = ({
         return (
                 <RoleProtected acceptRole={[UserRole.MANAGER, UserRole.OWNER]} isRedirect>
                         <div className="space-y-2">
-                                <h1 className="text-2xl font-semibold">{translate('title')}</h1>
+                                <h1 className="text-2xl font-semibold">{translate('title-managerAccount')}</h1>
                                 {SearchForm}
                                 {apiState.isLoading && LoadingSkeleton}
-                                {!Boolean(users.length) && !apiState.isLoading && <h1 className="text-xl font-semibold">{translate('listEmpty')}</h1>}
+                                {!Boolean(users.length) && !apiState.isLoading && (
+                                        <h1 className="text-xl font-semibold">{translate('extra-listEmpty')}</h1>
+                                )}
                                 {Boolean(users.length) && !apiState.isLoading && PageFooter}
                         </div>
                 </RoleProtected>

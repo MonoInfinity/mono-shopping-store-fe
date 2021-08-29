@@ -16,7 +16,7 @@ import LoadingScreen from './components/loading/loadingScreen';
 
 const LoginContainer = React.lazy(() => import('./containers/authentication/login'));
 const RegisterContainer = React.lazy(() => import('./containers/authentication/register'));
-const MainContainer = React.lazy(() => import('./containers/mainDashboard'));
+const MainDashboardContainer = React.lazy(() => import('./containers/mainDashboard'));
 
 function App() {
         const { i18n } = useTranslation();
@@ -35,13 +35,13 @@ function App() {
         return (
                 <Layout className="flex-1 fade-in">
                         <NavbarContainer />
-                        <Switch>
-                                <React.Suspense fallback={<LoadingScreen />}>
-                                        <Route path={routers.login.link} component={LoginContainer} />
+                        <React.Suspense fallback={<LoadingScreen />}>
+                                <Switch>
                                         <Route path={routers.register.link} component={RegisterContainer} />
-                                        <Route path={routers.home.link} component={MainContainer} />
-                                </React.Suspense>
-                        </Switch>
+                                        <Route path={routers.login.link} component={LoginContainer} />
+                                        <Route path={routers.home.link} component={MainDashboardContainer} />
+                                </Switch>
+                        </React.Suspense>
                 </Layout>
         );
 }

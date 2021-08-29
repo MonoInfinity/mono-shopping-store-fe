@@ -1,14 +1,17 @@
 import * as React from 'react';
 import MainDashboardPresentation from './presentation';
-import locales from './locales.json';
-import { useTranslate } from '../../common/hooks/useTranslate';
 
-export type LocaleKey = keyof typeof locales.en;
+import { useTranslate } from '../../common/hooks/useTranslate';
+import { RouteProtectedWrapper } from '../../common/HOC/routerProtectedWrapper';
 
 const MainDashboardContainer: React.FC = () => {
-        const translate = useTranslate<LocaleKey>({ dictionary: locales, name: 'mainDashboard' });
+        const translate = useTranslate();
 
-        return <MainDashboardPresentation translate={translate} />;
+        return (
+                <RouteProtectedWrapper isNeedLogin>
+                        <MainDashboardPresentation translate={translate} />
+                </RouteProtectedWrapper>
+        );
 };
 
 export default MainDashboardContainer;

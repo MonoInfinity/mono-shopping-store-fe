@@ -12,7 +12,6 @@ export interface RoleProtectedProps {
 
 const RoleProtected: React.FC<RoleProtectedProps> = ({ children, acceptRole, isRedirect = false }) => {
         const authState = useSelector<RootState, AuthState>((state) => state.auth);
-
         const router = useHistory();
 
         React.useEffect(() => {
@@ -21,7 +20,7 @@ const RoleProtected: React.FC<RoleProtectedProps> = ({ children, acceptRole, isR
                 if (!isCorrectRole && isRedirect) {
                         router.push(routers.home.link);
                 }
-        }, [authState, acceptRole, router, isRedirect]);
+        }, [authState]);
 
         return acceptRole.includes(authState.role) ? <>{children}</> : null;
 };

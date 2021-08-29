@@ -8,9 +8,7 @@ import { ApiState } from '../../../common/interface/api.interface';
 import { ChangePasswordDto } from '../../../common/interface/dto/user.dto';
 import { RootState } from '../../../store';
 
-import locales from './locales.json';
 import ChangePasswordPresentation from './presentation';
-export type LocaleKey = keyof typeof locales.en;
 
 const defaultValues: ChangePasswordDto = {
         confirmPassword: '',
@@ -22,7 +20,7 @@ const ChangePasswordContainer: React.FC = () => {
         const { handleSubmit, control, reset } = useForm<ChangePasswordDto>({ defaultValues });
         const apiState = useSelector<RootState, ApiState>((state) => state.api);
         const errors = useFormError<ChangePasswordDto>(defaultValues);
-        const translate = useTranslate<LocaleKey>({ dictionary: locales, name: 'changePasswordForm' });
+        const translate = useTranslate();
 
         const onSubmit = (data: ChangePasswordDto) => {
                 userAPI.updatePassword(data).then(() => {

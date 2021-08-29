@@ -10,18 +10,16 @@ import LoadingScreen from './components/loading/loadingScreen';
 import './i18n';
 
 ReactDOM.render(
-        <React.StrictMode>
-                <Provider store={store}>
-                        <BrowserRouter>
-                                <AutoLoginWrapper>
-                                        <div className="flex flex-col min-h-screen">
-                                                <Suspense fallback={<LoadingScreen />}>
-                                                        <App />
-                                                </Suspense>
-                                        </div>
-                                </AutoLoginWrapper>
-                        </BrowserRouter>
-                </Provider>
-        </React.StrictMode>,
+        <Provider store={store}>
+                <BrowserRouter>
+                        <AutoLoginWrapper>
+                                <div className="flex flex-col min-h-screen">
+                                        <Suspense fallback={<LoadingScreen />}>
+                                                <App />
+                                        </Suspense>
+                                </div>
+                        </AutoLoginWrapper>
+                </BrowserRouter>
+        </Provider>,
         document.getElementById('root')
 );

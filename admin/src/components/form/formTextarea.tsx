@@ -1,22 +1,25 @@
-import { Form, Input } from 'antd';
-import { Control, Controller } from 'react-hook-form';
+import { Form } from 'antd';
+import TextArea from 'antd/lib/input/TextArea';
 import * as React from 'react';
+import { Control, Controller } from 'react-hook-form';
 
-export interface TextFieldPasswordProps {
+export interface FormTextareaProps {
         error: string;
         field: string;
         label: string;
         control: Control<any>;
+        className?: string;
 }
 
-const TextFieldPassword: React.FC<TextFieldPasswordProps> = ({ control, error, field, label }) => {
+const FormTextarea: React.FC<FormTextareaProps> = ({ control, error, field, label, className = '' }) => {
         return (
-                <Form.Item label={label} className="w-full">
+                <Form.Item className={`w-full flex-1 ${className}`} label={label}>
                         <Controller
                                 name={field}
-                                defaultValue=""
                                 control={control}
-                                render={({ field }) => <Input.Password {...field} />}
+                                render={({ field }) => {
+                                        return <TextArea {...field} />;
+                                }}
                         />
                         {Boolean(error.length) && (
                                 <p className="text-red-500 ">
@@ -27,4 +30,4 @@ const TextFieldPassword: React.FC<TextFieldPasswordProps> = ({ control, error, f
         );
 };
 
-export default TextFieldPassword;
+export default FormTextarea;

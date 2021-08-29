@@ -1,12 +1,12 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError } from 'axios';
 
-import { store } from "../store";
-import Cookies from "universal-cookie";
-import { ServerResponse } from "../common/interface/api.interface";
-import { apiActions } from "../store/api";
+import { store } from '../store';
+import Cookies from 'universal-cookie';
+import { ServerResponse } from '../common/interface/api.interface';
+import { apiActions } from '../store/api';
 
 const axiosClient = axios.create({
-        baseURL: process.env.REACT_APP_SERVER_URL + "/api",
+        baseURL: process.env.REACT_APP_SERVER_URL + '/api',
         withCredentials: true,
 });
 
@@ -26,7 +26,7 @@ axiosClient.interceptors.response.use(
                 store.dispatch(apiActions.resetState());
                 if (error.response?.status === 401) {
                         const cookies = new Cookies();
-                        cookies.set("auth-token", "", { maxAge: -999 });
+                        cookies.set('auth-token', '', { maxAge: -999 });
                 }
 
                 if (error.response?.status) store.dispatch(apiActions.updateErrorDetails(error.response.data.details));

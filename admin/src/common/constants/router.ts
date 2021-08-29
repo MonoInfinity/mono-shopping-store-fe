@@ -2,7 +2,16 @@ interface IRouter {
         link: string;
 }
 
-type TRouters = 'register' | 'login' | 'home' | 'viewMyProfile' | 'changePassword' | 'viewAllUser' | 'updateUserProfile' | 'viewUserProfile';
+type TRouters =
+        | 'register'
+        | 'login'
+        | 'home'
+        | 'viewMyProfile'
+        | 'changePassword'
+        | 'viewAllUser'
+        | 'updateUserProfile'
+        | 'viewUserProfile'
+        | 'addNewProduct';
 
 export const routers: Record<TRouters, IRouter> = {
         home: {
@@ -29,5 +38,8 @@ export const routers: Record<TRouters, IRouter> = {
         },
         viewUserProfile: {
                 link: '/account/user',
+        },
+        addNewProduct: {
+                link: '/product/add-new-product',
         },
 };

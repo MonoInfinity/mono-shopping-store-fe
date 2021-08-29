@@ -9,10 +9,9 @@ import { ApiState } from '../../../common/interface/api.interface';
 import { UpdateUserDto } from '../../../common/interface/dto/user.dto';
 import { AuthState } from '../../../common/interface/user.interface';
 import { RootState } from '../../../store';
-import locales from './locales.json';
+
 import UpdateUserProfilePresentation from './presentation';
 export interface UpdateUserProfileContainerProps {}
-export type LocaleKey = keyof typeof locales.en;
 
 const defaultValues: UpdateUserDto = {
         address: '',
@@ -28,7 +27,7 @@ const UpdateUserProfileContainer: React.FC<UpdateUserProfileContainerProps> = ()
         const { handleSubmit, control, setValue } = useForm<UpdateUserDto>({ defaultValues });
         const [file, handleOnChangeFile] = useUploadFile();
         const errors = useFormError<UpdateUserDto>(defaultValues);
-        const translate = useTranslate<LocaleKey>({ dictionary: locales, name: 'updateUserProfile' });
+        const translate = useTranslate();
 
         const onSubmit = (data: UpdateUserDto) => {
                 if (file) {

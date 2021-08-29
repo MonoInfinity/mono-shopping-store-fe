@@ -14,7 +14,7 @@ export function useFormError<T>(defaultValues: T) {
 
                 if (isError) setErrors({ ...defaultValues, ...errorDetails });
                 else setErrors(defaultValues);
-        }, [apiState, defaultValues]);
+        }, [apiState]);
 
         React.useEffect(() => {
                 return () => {

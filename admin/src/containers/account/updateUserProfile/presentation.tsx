@@ -8,13 +8,13 @@ import { routers } from '../../../common/constants/router';
 import { RouteProtectedWrapper } from '../../../common/HOC/routerProtectedWrapper';
 import { ApiState } from '../../../common/interface/api.interface';
 import { UpdateUserDto } from '../../../common/interface/dto/user.dto';
+import { LocaleKey } from '../../../common/interface/locale.interface';
 import { AuthState } from '../../../common/interface/user.interface';
 import { FormBtn, FormMsg, TextField } from '../../../components/form';
-import { LocaleKey } from './index';
 
 export interface UpdateUserProfilePresentationProps {
-        apiState: ApiState;
         authState: AuthState;
+        apiState: ApiState;
         errors: UpdateUserDto;
         handleOnSubmit(input?: React.BaseSyntheticEvent<object, any, any> | undefined): Promise<void>;
         control: Control<UpdateUserDto>;
@@ -31,28 +31,52 @@ const UpdateUserProfilePresentation: React.FC<UpdateUserProfilePresentationProps
         translate,
         authState,
         file,
+        handOnChangeFile,
 }) => {
         const FormBody = (
                 <Form className="" name="basic" layout="vertical" onFinish={handleOnSubmit}>
-                        <Image
-                                width={200}
-                                preview={false}
-                                src={file ? URL.createObjectURL(file) : process.env.REACT_APP_STORAGE_SERVER_URL + authState.avatarUrl}
-                                className="border"
-                        ></Image>
+                        <Form.Item name="avatar">
+                                <Image
+                                        width={200}
+                                        preview={false}
+                                        src={
+                                                file
+                                                        ? URL.createObjectURL(file)
+                                                        : process.env.REACT_APP_STORAGE_SERVER_URL + authState.avatarUrl
+                                        }
+                                        className="border"
+                                ></Image>
+                        </Form.Item>
 
-                        <input type="file" onChange={handleOnSubmit} name="avatar" />
+                        <input type="file" onChange={handOnChangeFile} name="avatar" />
+
                         <FormMsg
                                 isError={apiState.isError}
                                 errorMessage={apiState.errorMessage}
                                 message={apiState.message}
                                 isLoading={apiState.isLoading}
                         />
-                        <TextField control={control} error={errors.name} field="name" label={translate('name')} />
-                        <TextField control={control} error={errors.email} field="email" label={translate('email')} />
-                        <TextField control={control} error={errors.address} field="address" label={translate('address')} />
-                        <TextField control={control} error={errors.phone} field="phone" label={translate('phone')} />
-                        <FormBtn isLoading={apiState.isLoading} label={translate('updateMyInformationButton')} />
+
+                        <TextField control={control} error={errors.name} field="name" label={translate('field-name')} />
+                        <TextField
+                                control={control}
+                                error={errors.email}
+                                field="email"
+                                label={translate('field-email')}
+                        />
+                        <TextField
+                                control={control}
+                                error={errors.address}
+                                field="address"
+                                label={translate('field-address')}
+                        />
+                        <TextField
+                                control={control}
+                                error={errors.phone}
+                                field="phone"
+                                label={translate('field-phone')}
+                        />
+                        <FormBtn isLoading={apiState.isLoading} label={translate('button-update')} />
                 </Form>
         );
 
@@ -60,12 +84,14 @@ const UpdateUserProfilePresentation: React.FC<UpdateUserProfilePresentationProps
                 <RouteProtectedWrapper isNeedLogin>
                         <div className="space-y-4">
                                 <button className="font-semibold ">
-                                        <Link to={routers.viewMyProfile.link}>{translate('goBack')}</Link>
+                                        <Link to={routers.viewMyProfile.link}>{translate('link-goBack')}</Link>
                                 </button>
 
                                 <div className="">
                                         <div className="px-2 py-4 space-y-8 border w-96 fade-in">
-                                                <h1 className="text-4xl font-semibold text-center">{translate('title')}</h1>
+                                                <h1 className="text-4xl font-semibold text-center">
+                                                        {translate('title-updateUserInformation')}
+                                                </h1>
                                                 {FormBody}
                                         </div>
                                 </div>

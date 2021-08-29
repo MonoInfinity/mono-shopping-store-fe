@@ -1,46 +1,72 @@
 import * as React from 'react';
 import ViewUserProfilePresentation from './presentation';
-import locales from './locales.json';
+
 import { useTranslate } from '../../../common/hooks/useTranslate';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { ApiState } from '../../../common/interface/api.interface';
 import { useForm } from 'react-hook-form';
-import { UpdateEmployeeDto } from '../../../common/interface/dto/user.dto';
-import { User, UserRole, UserStatus } from '../../../common/interface/user.interface';
-import { useParams } from 'react-router-dom';
+
+import { User, UserRole } from '../../../common/interface/user.interface';
 import adminAPI from '../../../api/adminApi';
 import useFormError from '../../../common/hooks/useFormError';
-
-export type LocaleKey = keyof typeof locales.en;
+import { UpdateEmployeeDto } from '../../../common/interface/dto/admin.dto';
+import { roleOptions } from '../../../common/constants/user';
+import { Form } from 'antd';
+import { convertRoleToString } from '../../../common/helper/userHelper';
 
 const defaultValues: UpdateEmployeeDto = {
-        role: UserRole.CUSTOMER,
+        role: '',
         salary: '0',
-        status: UserStatus.ENABLE,
+        status: '0',
         userId: '',
 };
-const ViewUserProfile: React.FC = () => {
-        const { handleSubmit, control } = useForm<UpdateEmployeeDto>({ defaultValues });
-        const translate = useTranslate<LocaleKey>({ dictionary: locales, name: 'viewUserProfilePage' });
+
+export interface ViewUserProfileProps {
+        match: {
+                params: {
+                        id: string | undefined;
+                };
+        };
+}
+
+const ViewUserProfile: React.FC<ViewUserProfileProps> = ({ match }) => {
+        const { handleSubmit, control, setValue } = useForm<UpdateEmployeeDto>({ defaultValues });
+        const translate = useTranslate();
         const apiState = useSelector<RootState, ApiState>((state) => state.api);
-        const params = useParams<{ id: string }>();
         const [user, setUser] = React.useState<User>();
-        const errors = useFormError<UpdateEmployeeDto>(defaultValues);
+        const [form] = Form.useForm<UpdateEmployeeDto>();
+        const errors = useFormError<UpdateEmployeeDto>({
+                role: '',
+                salary: '',
+                status: '',
+                userId: '',
+        });
+
+        React.useEffect(() => {
+                form.setFieldsValue({ role: String(UserRole.CUSTOMER) });
+        }, [form]);
 
         const onSubmit = (data: UpdateEmployeeDto) => {
-                console.log(data);
+                if (user)
+                        adminAPI.updateEmployee({
+                                role: data.role,
+                                salary: data.salary,
+                                status: data.status,
+                                userId: user?.userId,
+                        });
         };
 
         React.useEffect(() => {
-                const userId = params.id;
-                if (userId) {
-                        adminAPI.getUserById(userId).then((res) => {
+                if (match.params.id) {
+                        adminAPI.getUserById(match.params.id).then((res) => {
                                 setUser(res.data.data);
+                                setValue('salary', String(res.data.data.salary));
+                                setValue('role', translate(convertRoleToString(res.data.data.role)));
+                                setValue('status', String(res.data.data.status));
                         });
                 }
-        }, [params.id]);
-
+        }, [match.params.id]);
         return (
                 <ViewUserProfilePresentation
                         user={user}
@@ -49,6 +75,7 @@ const ViewUserProfile: React.FC = () => {
                         control={control}
                         errors={errors}
                         handleOnSubmit={handleSubmit(onSubmit)}
+                        roleOptions={roleOptions}
                 />
         );
 };

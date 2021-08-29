@@ -1,6 +1,6 @@
-import { Button, Spin } from "antd";
-import { Form } from "antd";
-import * as React from "react";
+import { Button, Spin } from 'antd';
+import { Form } from 'antd';
+import * as React from 'react';
 
 export interface FormBtnProps {
         isLoading: boolean;
@@ -9,7 +9,7 @@ export interface FormBtnProps {
 
 const FormBtn: React.FC<FormBtnProps> = ({ isLoading, label }) => {
         return (
-                <Form.Item name={label}>
+                <Form.Item>
                         {isLoading && (
                                 <div className="text-center ">
                                         <Spin size="large" />
