@@ -41,20 +41,22 @@ const MainDashboardPresentation: React.FC<MainDashboardPresentationProps> = ({ t
                                                         {translate('link-viewMyProfile')}
                                                 </Link>
                                         </Menu.Item>
-                                        <Menu.Item key="2">
-                                                <RoleProtected acceptRole={[UserRole.MANAGER, UserRole.OWNER]}>
+                                        <RoleProtected acceptRole={[UserRole.MANAGER, UserRole.OWNER]}>
+                                                <Menu.Item key="2">
                                                         <Link to={routers.viewAllUser.link}>
                                                                 {translate('link-viewAllUser')}
                                                         </Link>
-                                                </RoleProtected>
-                                        </Menu.Item>
+                                                </Menu.Item>
+                                        </RoleProtected>
                                 </SubMenu>
                                 <SubMenu key="sub2" icon={<UserOutlined />} title={translate('title-product')}>
-                                        <Menu.Item key="3">
-                                                <Link to={routers.addNewProduct.link}>
-                                                        {translate('link-addNewProduct')}
-                                                </Link>
-                                        </Menu.Item>
+                                        <RoleProtected acceptRole={[UserRole.MANAGER, UserRole.OWNER]}>
+                                                <Menu.Item key="3">
+                                                        <Link to={routers.addNewProduct.link}>
+                                                                {translate('link-addNewProduct')}
+                                                        </Link>
+                                                </Menu.Item>
+                                        </RoleProtected>
                                 </SubMenu>
                         </Menu>
                 </Sider>

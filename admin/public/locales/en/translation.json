@@ -1,11 +1,13 @@
 {
         "title-login": "Login Account",
         "title-userInformation": "User Information",
-        "title-updateUserInformation": "Update Information",
+        "title-updateUserInformation": "Update User Information",
         "title-managerAccount": "Manager Account",
         "title-account": "Account",
         "title-register": "Register Account",
         "title-changePassword": "Change Password",
+        "title-addNewProduct": "Add New Product",
+        "title-product": "Product",
 
         "button-update": "Update",
         "button-login": "Sign In",
@@ -13,6 +15,7 @@
         "button-changePassword": "Change Password",
         "button-editProfile": "Edit Profile",
         "button-logout": "Logout",
+        "button-addNewProduct": "Add New Product",
 
         "field-username": "Username",
         "field-password": "Password",
@@ -23,6 +26,13 @@
         "field-currentPassword": "Current Password",
         "field-newPassword": "New Password",
         "field-phone": "Phone",
+        "field-location": "Location",
+        "field-quantity": "Quantity",
+        "field-retailPrice": "Retail Price",
+        "field-category": "Category",
+        "field-subcategory": "Subcategory",
+        "field-wholesalePrice": "Wholesale Price",
+        "field-description": "Description",
         "field-role": "Role",
         "field-joinDate": "Join Date",
         "field-salary": "Salary",
@@ -36,6 +46,7 @@
         "link-viewAllUser": "View All User",
         "link-register": "Register",
         "link-login": "Login",
+        "link-addNewProduct": "Add New Product",
 
         "extra-or": "or",
         "extra-remember": "Remember Me",
@@ -46,7 +57,7 @@
         "user-status-inactive": "inactive",
         "user-role-customer": "Customer",
         "user-role-shipper": "Shipper",
-        "user-role-cashier": "Cashier",
         "user-role-manager": "Manager",
-        "user-role-owner": "Owner"
+        "user-role-owner": "Owner",
+        "user-role-cashier": "Cashier"
 }

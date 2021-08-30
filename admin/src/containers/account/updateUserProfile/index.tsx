@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import commonAPI from '../../../api/commonApi';
 import userAPI from '../../../api/userApi';
 import useFormError from '../../../common/hooks/useFormError';
 import { useTranslate } from '../../../common/hooks/useTranslate';
@@ -31,10 +32,11 @@ const UpdateUserProfileContainer: React.FC<UpdateUserProfileContainerProps> = ()
 
         const onSubmit = (data: UpdateUserDto) => {
                 if (file) {
-                        userAPI.uploadFile(file).then((res) => {
-                                const avatarUrl = res.data.data;
+                        commonAPI.uploadFile(file).then(({ data: { data: avatarUrl } }) => {
                                 userAPI.updateUser({ ...data, avatarUrl });
                         });
+                } else {
+                        userAPI.updateUser({ ...data });
                 }
         };
 

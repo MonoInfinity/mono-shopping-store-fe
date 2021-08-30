@@ -6,6 +6,8 @@
         "title-account": "Tài Khoản",
         "title-register": "Đăng Ký Tài Khoản",
         "title-changePassword": "Đỗi Mật Khẩu",
+        "title-addNewProduct": "Thêm Sản Phẩm",
+        "title-product": "Sản Phẩm",
 
         "button-update": "Cập Nhật",
         "button-login": "Đăng Nhập",
@@ -13,6 +15,7 @@
         "button-changePassword": "Đỗi Mật Khẩu",
         "button-editProfile": "Chỉnh Sửa Hồ Sơ",
         "button-logout": "Đăng Xuất",
+        "button-addNewProduct": "Thêm Sản Phẩm Mới",
 
         "field-username": "Tên Tài Khoản",
         "field-password": "Mật Khẩu",
@@ -27,6 +30,13 @@
         "field-joinDate": "Ngày Khỏi Tạo",
         "field-salary": "Lương",
         "field-address": "Địa Chỉ",
+        "field-location": "Địa Điểm",
+        "field-quantity": "Số Lượng",
+        "field-retailPrice": "Gía Bán Lẻ",
+        "field-wholesalePrice": "Gía Bản Sỉ",
+        "field-category": "Danh Mục",
+        "field-subcategory": "Tiểu Mục",
+        "field-description": "Mô Tả",
 
         "link-registerInstead": "Đăng Ký Tài Khoản Mới",
         "link-loginInstead": "Đăng Nhập Với Tài Khoản",
@@ -36,6 +46,7 @@
         "link-viewAllUser": "Tìm Kiếm Tài Khoản",
         "link-register": "Đăng Ký",
         "link-login": "Đăng Nhập",
+        "link-addNewProduct": "Thêm Sản Phẩm Mới",
 
         "extra-or": "Hoặc",
         "extra-remember": "Giữ Đăng Nhập",

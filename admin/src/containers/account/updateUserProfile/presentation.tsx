@@ -1,4 +1,4 @@
-import { Image, Form } from 'antd';
+import { Form } from 'antd';
 
 import * as React from 'react';
 import { Control } from 'react-hook-form';
@@ -11,6 +11,7 @@ import { UpdateUserDto } from '../../../common/interface/dto/user.dto';
 import { LocaleKey } from '../../../common/interface/locale.interface';
 import { AuthState } from '../../../common/interface/user.interface';
 import { FormBtn, FormMsg, TextField } from '../../../components/form';
+import FormUpload from '../../../components/form/formUpload';
 
 export interface UpdateUserProfilePresentationProps {
         authState: AuthState;
@@ -35,20 +36,12 @@ const UpdateUserProfilePresentation: React.FC<UpdateUserProfilePresentationProps
 }) => {
         const FormBody = (
                 <Form className="" name="basic" layout="vertical" onFinish={handleOnSubmit}>
-                        <Form.Item name="avatar">
-                                <Image
-                                        width={200}
-                                        preview={false}
-                                        src={
-                                                file
-                                                        ? URL.createObjectURL(file)
-                                                        : process.env.REACT_APP_STORAGE_SERVER_URL + authState.avatarUrl
-                                        }
-                                        className="border"
-                                ></Image>
-                        </Form.Item>
-
-                        <input type="file" onChange={handOnChangeFile} name="avatar" />
+                        <FormUpload
+                                defaultImage={process.env.REACT_APP_STORAGE_SERVER_URL + authState.avatarUrl}
+                                field="avatar"
+                                file={file}
+                                handleOnChangeFile={handOnChangeFile}
+                        />
 
                         <FormMsg
                                 isError={apiState.isError}

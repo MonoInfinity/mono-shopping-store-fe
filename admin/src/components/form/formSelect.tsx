@@ -2,11 +2,9 @@ import { Form, Select } from 'antd';
 
 import * as React from 'react';
 import { Control, Controller } from 'react-hook-form';
-import { convertRoleToString } from '../../common/helper/userHelper';
 
 import { useTranslate } from '../../common/hooks/useTranslate';
 import { LocaleKey } from '../../common/interface/locale.interface';
-import { UserRole } from '../../common/interface/user.interface';
 
 export interface OptionItem {
         value: any;

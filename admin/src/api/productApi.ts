@@ -1,6 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { ServerResponse } from '../common/interface/api.interface';
 import { Category, Subcategory } from '../common/interface/category.interface';
+import { AddNewProductDto } from '../common/interface/dto/product.dto';
 import http from './axiosCommon';
 
 export class ProductApi {
@@ -11,6 +12,13 @@ export class ProductApi {
                 const res = await this.apiCall.get<ServerResponse<Category[]>>(url);
                 return res;
         }
+
+        public async addNewProduct(input: AddNewProductDto) {
+                const url = `${this.prefix}`;
+                const res = await this.apiCall.post<ServerResponse<Category[]>>(url, input);
+                return res;
+        }
+
         public async getSubcategoryByCategoryId(id: string) {
                 const url = `${this.prefix}/subcategory/category?categoryId=${id}`;
                 const res = await this.apiCall.get<ServerResponse<Subcategory[]>>(url);

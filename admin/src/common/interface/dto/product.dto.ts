@@ -2,11 +2,21 @@ export interface AddNewProductDto {
         name: string;
         description: string;
         location: string;
-        expireDate: string;
+        wholesalePrice: number;
+        retailPrice: number;
+        quantity: number;
+        subCategoryId: string;
+        imageUrl: string;
+}
+
+export interface AddNewProductForm {
+        categoryId: string;
+        name: string;
+        description: string;
+        location: string;
         wholesalePrice: string;
         retailPrice: string;
         quantity: string;
-        subcategoryId: string;
-        categoryId: string;
+        subCategoryId: string;
         imageUrl: string;
 }

@@ -1,4 +1,3 @@
-import { OptionItem } from '../../components/form/formSelect';
 import { EntityStatus } from './common.interface';
 
 export enum UserRole {

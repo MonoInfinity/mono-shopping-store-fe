@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+
 import userAPI from '../../../api/userApi';
 import useFormError from '../../../common/hooks/useFormError';
 import { useTranslate } from '../../../common/hooks/useTranslate';
 import { ApiState } from '../../../common/interface/api.interface';
 import { ChangePasswordDto } from '../../../common/interface/dto/user.dto';
 import { RootState } from '../../../store';
-
 import ChangePasswordPresentation from './presentation';
 
 const defaultValues: ChangePasswordDto = {

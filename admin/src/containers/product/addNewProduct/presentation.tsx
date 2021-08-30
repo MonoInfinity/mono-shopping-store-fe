@@ -1,21 +1,21 @@
-import { Col, Form, Image, Row } from 'antd';
+import { Col, Form, Row } from 'antd';
 
 import * as React from 'react';
 import { Control } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { routers } from '../../../common/constants/router';
+
 import { ApiState } from '../../../common/interface/api.interface';
-import { AddNewProductDto } from '../../../common/interface/dto/product.dto';
+import { AddNewProductForm } from '../../../common/interface/dto/product.dto';
 import { LocaleKey } from '../../../common/interface/locale.interface';
 import { FormBtn, FormMsg, TextField, TextNumber } from '../../../components/form';
 import FormSelect, { OptionItem } from '../../../components/form/formSelect';
 import FormTextarea from '../../../components/form/formTextarea';
+import FormUpload from '../../../components/form/formUpload';
 
 export interface AddNewProductPresentationProps {
         apiState: ApiState;
-        errors: AddNewProductDto;
+        errors: AddNewProductForm;
         handleOnSubmit(input?: React.BaseSyntheticEvent<object, any, any> | undefined): Promise<void>;
-        control: Control<AddNewProductDto>;
+        control: Control<AddNewProductForm>;
         handOnChangeFile(file: React.ChangeEvent<HTMLInputElement>): void;
         translate(key: LocaleKey, context?: any): string;
         file: File | undefined;
@@ -37,15 +37,14 @@ const AddNewProductPresentation: React.FC<AddNewProductPresentationProps> = ({
 }) => {
         const FormBody = (
                 <Form layout="vertical" onFinish={handleOnSubmit}>
-                        <h1 className="pb-4 text-3xl font-semibold">Add New Product</h1>
-                        <Form.Item className="w-64 mx-auto">
-                                <Image
-                                        preview={false}
-                                        src={file ? URL.createObjectURL(file) : '/images/default-product.jpg'}
-                                        className="border"
-                                ></Image>
-                                <input className="block" type="file" onChange={handOnChangeFile} name="avatar" />
-                        </Form.Item>
+                        <h1 className="pb-4 text-3xl font-semibold">{translate('title-addNewProduct')}</h1>
+
+                        <FormUpload
+                                defaultImage="/images/default-product.jpg"
+                                field="avatar"
+                                file={file}
+                                handleOnChangeFile={handOnChangeFile}
+                        />
 
                         <FormMsg
                                 isError={apiState.isError}
@@ -105,7 +104,7 @@ const AddNewProductPresentation: React.FC<AddNewProductPresentationProps> = ({
                                 <Col span={11} offset={2}>
                                         <FormSelect
                                                 control={control}
-                                                field="subcategoryId"
+                                                field="subCategoryId"
                                                 label={translate('field-subcategory')}
                                                 optionItem={subcategoryOptions}
                                         />
@@ -125,7 +124,7 @@ const AddNewProductPresentation: React.FC<AddNewProductPresentationProps> = ({
                                 label={translate('field-description')}
                         />
 
-                        <FormBtn isLoading={apiState.isLoading} label={translate('button-update')} />
+                        <FormBtn isLoading={apiState.isLoading} label={translate('button-addNewProduct')} />
                 </Form>
         );
 

@@ -1,11 +1,10 @@
-import { Descriptions, Image, Radio, Form } from 'antd';
+import { Descriptions, Image, Form } from 'antd';
 import * as React from 'react';
 import { Control } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import { routers } from '../../../common/constants/router';
 
-import { RouteProtectedWrapper } from '../../../common/HOC/routerProtectedWrapper';
 import { ApiState } from '../../../common/interface/api.interface';
 import { UpdateEmployeeDto } from '../../../common/interface/dto/admin.dto';
 
@@ -15,7 +14,6 @@ import { FormBtn, FormMsg, TextNumber } from '../../../components/form';
 import FormSelect, { OptionItem } from '../../../components/form/formSelect';
 import FormRadioStatus from '../../../components/form/formRadioStatus';
 import RoleProtected from '../../../common/HOC/roleProtected';
-import { convertRoleToString } from '../../../common/helper/userHelper';
 
 export interface ViewUserProfilePresentationProps {
         apiState: ApiState;
