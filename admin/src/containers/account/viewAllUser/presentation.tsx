@@ -1,4 +1,4 @@
-import { Badge, Button, List, Pagination, Skeleton, Avatar, Form } from 'antd';
+import { Badge, Button, List, Pagination, Skeleton, Avatar, Form, Row, Col } from 'antd';
 
 import * as React from 'react';
 import { Control } from 'react-hook-form';
@@ -53,16 +53,25 @@ const ViewAllUserPresentation: React.FC<ViewAllUserPresentationProps> = ({
         const SearchForm = (
                 <>
                         <Form onFinish={handleOnSearch} layout="vertical">
-                                <div className="flex space-x-8">
-                                        <TextField control={control} error="" field="name" label="Name" />
-                                        <Form.Item className="flex-1 " label="Role">
-                                                <FormSelect control={control} field="role" optionItem={roleOptions} />
+                                <Row>
+                                        <Col span="11">
+                                                <TextField control={control} error="" field="name" label="Name" />
+                                        </Col>
+                                        <Col span="11" offset="2">
+                                                <Form.Item className="flex-1 " label="Role">
+                                                        <FormSelect
+                                                                control={control}
+                                                                field="role"
+                                                                optionItem={roleOptions}
+                                                        />
+                                                </Form.Item>
+                                        </Col>
+                                </Row>
+                                <Row>
+                                        <Form.Item className="w-32">
+                                                <FormBtn isLoading={apiState.isLoading} label="Search" />
                                         </Form.Item>
-                                </div>
-
-                                <Form.Item className="w-32">
-                                        <FormBtn isLoading={apiState.isLoading} label="Search" />
-                                </Form.Item>
+                                </Row>
                         </Form>
                 </>
         );

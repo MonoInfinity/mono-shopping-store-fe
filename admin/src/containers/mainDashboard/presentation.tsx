@@ -10,13 +10,14 @@ import { routers } from '../../common/constants/router';
 
 import { UserRole } from '../../common/interface/user.interface';
 import { LocaleKey } from '../../common/interface/locale.interface';
-import AddNewProductContainer from '../product/addNewProduct';
+import DisplayByRole from '../../common/helper/roleHelper';
 
 const ViewMyProfileContainer = React.lazy(() => import('../account/viewMyProfile'));
 const ChangePasswordContainer = React.lazy(() => import('../account/changePassword'));
 const ViewAllUserContainer = React.lazy(() => import('../account/viewAllUser'));
 const UpdateUserProfileContainer = React.lazy(() => import('../account/updateUserProfile'));
 const ViewUserProfileContainer = React.lazy(() => import('../account/viewUserProfile'));
+const AddNewProductContainer = React.lazy(() => import('../product/addNewProduct'));
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -41,13 +42,12 @@ const MainDashboardPresentation: React.FC<MainDashboardPresentationProps> = ({ t
                                                         {translate('link-viewMyProfile')}
                                                 </Link>
                                         </Menu.Item>
-                                        <RoleProtected acceptRole={[UserRole.MANAGER, UserRole.OWNER]}>
-                                                <Menu.Item key="2">
-                                                        <Link to={routers.viewAllUser.link}>
-                                                                {translate('link-viewAllUser')}
-                                                        </Link>
-                                                </Menu.Item>
-                                        </RoleProtected>
+
+                                        <Menu.Item key="2">
+                                                <Link to={routers.viewAllUser.link}>
+                                                        {translate('link-viewAllUser')}
+                                                </Link>
+                                        </Menu.Item>
                                 </SubMenu>
                                 <SubMenu key="sub2" icon={<UserOutlined />} title={translate('title-product')}>
                                         <RoleProtected acceptRole={[UserRole.MANAGER, UserRole.OWNER]}>
